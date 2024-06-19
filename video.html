@@ -154,15 +154,21 @@
         .balloons {
             position: absolute;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 0;
+            left: 0;
+            right: 0;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: flex-end;
+            z-index: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
+        }
+        .balloons.left {
+            justify-content: flex-start;
+        }
+        .balloons.right {
+            justify-content: flex-end;
         }
         .balloon {
             width: 50px;
@@ -170,8 +176,8 @@
             background-color: #ff69b4;
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             margin: 10px;
-            position: absolute;
-            bottom: -70px;
+            position: relative;
+            bottom: 0;
             animation: rise 10s infinite ease-in-out;
         }
         .balloon:after {
@@ -228,10 +234,13 @@
         <img src="birthday-cake.jpg" alt="Birthday Cake">
         <p>Here's a special video surprise just for you:</p>
         <iframe src="https://drive.google.com/file/d/1J0de0T4RzWCJBt6TlXzZhkZbtTxiJ1He/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        <p class="quote">"Count your life by smiles, not tears. Count your age by friends, not years." – John Lennon</p>
-        <div class="balloons">
+        <p class="quote">"Count your life by smiles, not tears. Count your age by friends, not years."</p>
+        <div class="balloons left">
             <div class="balloon"></div>
             <div class="balloon"></div>
+            <div class="balloon"></div>
+        </div>
+        <div class="balloons right">
             <div class="balloon"></div>
             <div class="balloon"></div>
             <div class="balloon"></div>
