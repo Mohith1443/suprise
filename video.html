@@ -6,7 +6,7 @@
     <title>Hey Sahithya, Happy Birthday!</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             background-color: #ffcccc; /* Lovely background color */
             color: #663399; /* Font color that complements the background */
             display: flex;
@@ -22,10 +22,35 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 600px;
             width: 90%;
+            position: relative;
+            overflow: hidden; /* Ensure confetti stays within the container */
+        }
+        .celebration-icon {
+            position: absolute;
+            top: 20px;
+            font-size: 2.5em;
+            animation: bounce 1s infinite alternate;
+            z-index: 1; /* Ensure the icon is above the content */
+        }
+        .celebration-icon.left {
+            left: 20px;
+        }
+        .celebration-icon.right {
+            right: 20px;
+        }
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-10px);
+            }
         }
         h1 {
             color: #663399; /* Matching font color */
             margin-bottom: 10px;
+            position: relative;
+            z-index: 1; /* Ensure h1 appears above the confetti */
         }
         p {
             font-size: 1.1em;
@@ -37,6 +62,8 @@
             height: auto;
             border-radius: 8px;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1; /* Ensure images appear above the confetti */
         }
         video {
             width: 100%;
@@ -49,10 +76,12 @@
             font-size: 1.2em;
             font-weight: bold;
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1; /* Ensure text appears above the confetti */
         }
         .gift-box {
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 190px;
             background-color: #f0e68c; /* Gold color for the gift box */
             border-radius: 50%;
             display: flex;
@@ -60,38 +89,204 @@
             align-items: center;
             margin: 0 auto 20px;
             overflow: hidden;
+            position: relative;
+            z-index: 1; /* Ensure gift box appears above the confetti */
         }
         .gift-box img {
             max-width: 100%;
-            height: auto;
+            height: 120%;
             border-radius: 8px;
         }
-        iframe{
-        width:450px ;
-    height: 800px;
-}
- /* Media query for mobile devices */
- @media (max-width: 770px) {
-    .container {
-        padding: 10px;
-    }
-    iframe {
-        width: 100%;
-        height: 750px; /* Adjust height as needed */
-    }
-}
+        iframe {
+            width: 450px;
+            height: 800px;
+            border: 1px solid #cccccc;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1; /* Ensure iframe appears above the confetti */
+        }
+        .quote {
+            font-size: 1.2em;
+            color: #cc6699;
+            margin-top: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 1; /* Ensure quote appears above the confetti */
+        }
+        /* Media query for mobile devices */
+        @media (max-width: 770px) {
+            .container {
+                padding: 10px;
+            }
+            iframe {
+                width: 100%;
+                height: 750px; /* Adjust height as needed */
+            }
+            .celebration-icon.left {
+                left: 20px;
+                top: 60px;
+            }
+            .celebration-icon.right {
+                right: 20px;
+                top: 60px;
+
+            }
+            @keyframes bounce {
+                from {
+                    transform: translateY(0);
+                }
+                to {
+                    transform: translateY(-10px);
+                }
+            }
+        }
+        .confetti {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0; /* Ensure confetti is below the content */
+        }
+        .balloons {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .balloon {
+            width: 50px;
+            height: 70px;
+            background-color: #ff69b4;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            margin: 10px;
+            position: absolute;
+            bottom: -70px;
+            animation: rise 10s infinite ease-in-out;
+        }
+        .balloon:after {
+            content: '';
+            width: 2px;
+            height: 30px;
+            background-color: #666;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        @keyframes rise {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-150vh) translateX(calc(30vw - 50%)) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .balloon:nth-child(2) {
+            background-color: #ffd700;
+            animation-delay: 2s;
+        }
+        .balloon:nth-child(3) {
+            background-color: #ff4500;
+            animation-delay: 4s;
+        }
+        .balloon:nth-child(4) {
+            background-color: #db7093;
+            animation-delay: 6s;
+        }
+        .balloon:nth-child(5) {
+            background-color: #1e90ff;
+            animation-delay: 8s;
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <span class="celebration-icon left">🎉</span>
+        <span class="celebration-icon right">🎉</span>
+        <canvas class="confetti"></canvas>
         <h1>Hey Sahithya, Happy Birthday!</h1>
         <div class="gift-box">
-            <img src="gift.jpg" alt="Gift">
+            <img src="hb.jpg" alt="Gift">
         </div>
         <p class="birthday-message">Wishing you a day filled with love, laughter, and joy!</p>
         <img src="birthday-cake.jpg" alt="Birthday Cake">
         <p>Here's a special video surprise just for you:</p>
-        <iframe src="https://drive.google.com/file/d/1J0de0T4RzWCJBt6TlXzZhkZbtTxiJ1He/preview" allow="autoplay; encrypted-media" style="border: 1px solid #cccccc; border-radius: 8px; display: block; margin: 0 auto;" controls></iframe>
+        <iframe src="https://drive.google.com/file/d/1J0de0T4RzWCJBt6TlXzZhkZbtTxiJ1He/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        <p class="quote">"Count your life by smiles, not tears. Count your age by friends, not years." – John Lennon</p>
+        <div class="balloons">
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+            <div class="balloon"></div>
+        </div>
     </div>
+    <script>
+        // Confetti effect
+        (function() {
+            const confettiCanvas = document.querySelector('.confetti');
+            const ctx = confettiCanvas.getContext('2d');
+            const confettiColors = ['#FFC0CB', '#FFD700', '#FF69B4', '#FF4500', '#DB7093'];
+            const confettiCount = 150;
+            const confetti = [];
+
+            function resizeCanvas() {
+                confettiCanvas.width = document.querySelector('.container').offsetWidth;
+                confettiCanvas.height = document.querySelector('.container').offsetHeight;
+            }
+
+            function createConfetti() {
+                for (let i = 0; i < confettiCount; i++) {
+                    confetti.push({
+                        x: Math.random() * confettiCanvas.width,
+                        y: Math.random() * confettiCanvas.height - confettiCanvas.height,
+                        r: (Math.random() * 6) + 4,
+                        d: (Math.random() * confettiColors.length),
+                        tilt: Math.random() * 10 - 10
+                    });
+                }
+            }
+
+            function drawConfetti() {
+                ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+                for (let i = 0; i < confettiCount; i++) {
+                    const c = confetti[i];
+                    ctx.beginPath();
+                    ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2, false);
+                    ctx.fillStyle = confettiColors[c.d];
+                    ctx.fill();
+                    c.y += 2;
+                    c.x += Math.sin(c.tilt / 10) * 2;
+                    c.tilt += 0.1;
+                    if (c.y > confettiCanvas.height) {
+                        c.y = -c.r;
+                        c.x = Math.random() * confettiCanvas.width;
+                    }
+                }
+                requestAnimationFrame(drawConfetti);
+            }
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            createConfetti();
+            drawConfetti();
+        })();
+    </script>
 </body>
 </html>
