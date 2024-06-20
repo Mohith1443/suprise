@@ -1,211 +1,300 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Gowra</title>
-    <link rel="wedsite icon" type="png" href="letter-g.png"> 
+    <link rel="icon" type="image/png" href="letter-g.png">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5; /* Background color fallback */
+            background-image: url('c.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative; /* Ensure the body is positioned relative */
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+        }
+
+        .container {
+            position: relative;
+            width: 500px; /* Adjust width as needed */
+            height: 500px; /* Adjust height as needed */
+            background-color: rgba(255, 191, 179, 0.8); /* Background color with opacity */
+            transform: rotate(-45deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5); /* Pale white shadow */
+            z-index: 2; /* Ensure container is above the canvas */
+        }
+
+        .container::before, .container::after {
+            content: "";
+            position: absolute;
+            width: 500px; /* Adjust width as needed */
+            height: 500px; /* Adjust height as needed */
+            background-color: rgba(255, 191, 179, 0.8); /* Background color with opacity */
+            border-radius: 50%;
+            z-index: -1; /* Ensure the background shapes are behind the form */
+        }
+
+        .container::before {
+            top: -250px; /* Adjusted to sync with the main container */
+            left: 0;
+        }
+
+        .container::after {
+            left: 250px; /* Adjusted to sync with the main container */
+            top: 0;
+        }
+
+        .form_area {
+            position: absolute;
+            top: 55%;
+            left: 25%;
+            transform: rotate(45deg) translate(-50%, -50%);
+            width: 80%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            border-radius: 20px; /* Rounded corners for the form area */
+            z-index: 3; /* Ensure form is above other elements */
+        }
+
+        .title {
+            color: #264143;
+            font-weight: 900;
+            font-size: 2.5em;
+            margin-top: 20px;
+        }
+
+        .sub_title {
+            font-weight: 600;
+            font-size: 1.5em;
+            margin: 5px 0;
+        }
+
+        .form_group {
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+            margin: 10px;
+        }
+
+        .form_style {
+            outline: none;
+            border: 2px solid #264143;
+            box-shadow: 3px 4px 0px 1px #E99F4C;
+            width: 100%;
+            padding: 12px 10px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+
+        .form_style:focus, .btn:focus {
+            transform: translateY(4px);
+            box-shadow: 1px 2px 0px 0px #E99F4C;
+        }
+
+        .btn {
+            padding: 15px;
+            margin: 25px 0px;
+            width: 100%;
+            font-size: 15px;
+            background: #DE5499;
+            border-radius: 10px;
+            font-weight: 800;
+            box-shadow: 3px 3px 0px 0px #E99F4C;
+            letter-spacing: 0.1em; /* Adds a small amount of space between letters */
+        }
+
+        .btn:hover {
+            opacity: .9;
+        }
+
+        .link {
+            font-weight: 800;
+            color: #264143;
+            padding: 5px;
+        }
+
+        /* Media Queries for responsiveness */
+        @media only screen and (max-width: 768px) {
+            .container {
+                width: 90%; /* Adjust width for mobile view */
+                height: auto; /* Allow height to adjust based on content */
+            }
+            .form_area {
+                width: 100%; /* Full width for the form area */
+                height: auto; /* Allow height to adjust based on content */
+                padding: 20px; /* Add padding for better spacing */
+            }
+        }
+
+        canvas#confettiCanvas {
+            position: fixed; /* Fixed position to stay in the viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Ensure canvas is above the background image but below all other content */
+            pointer-events: none; /* Ensure canvas doesn't block other elements */
+        }
+    </style>
 </head>
 <body>
-  <div id="mdContainer"></div>
-
-   
-<div class="container">
-  <div class="form_area">
-      <p class="title">SIGN IN</p><br>
-      <form id="loginForm">
-          <div class="form_group">
-              <label class="sub_title" for="email">Name</label>
-              <input placeholder="Enter your name" id="email" class="form_style" type="email" required>
-          </div>
-          <div class="form_group">
-              <label class="sub_title" for="password">Password</label>
-              <input placeholder="Enter your password" id="password" class="form_style" type="password" required>
-          </div>
-          <div>
-              <button type="submit" class="btn">SIGN IN</button>
-          </div>
-      </form>
-  </div>
-</div>
-    <style>
-      body, html {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: #f5f5f5; /* Background color fallback */
-        background-image: url('c.jpg'); /* Replace with your image path */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-    }
-    
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
-    }
-
-    
-    .container {
-        position: relative;
-        width: 500px; /* Adjust width as needed */
-        height: 500px; /* Adjust height as needed */
-        background-color: rgba(255, 191, 179, 1.8); /* Background color with opacity */
-        transform: rotate(-45deg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-shadow: 0 8px 16px rgba(255, 255, 255, 0.5); /* Pale white shadow */
-    }
-    
-    .container::before, .container::after {
-        content: "";
-        position: absolute;
-        width: 500px; /* Adjust width as needed */
-        height: 500px; /* Adjust height as needed */
-        background-color: rgba(255, 191, 179, 1.8); /* Background color with opacity */
-        border-radius: 50%;
-        z-index: -1; /* Ensure the background shapes are behind the form */
-    }
-    
-    .container::before {
-        top: -250px; /* Adjusted to sync with the main container */
-        left: 0;
-    }
-    
-    .container::after {
-        left: 250px; /* Adjusted to sync with the main container */
-        top: 0;
-    }
-    
-    .form_area {
-        position: absolute;
-        top: 55%;
-        left: 25%;
-        transform: rotate(45deg) translate(-50%, -50%);
-        width: 80%;
-        height: 80%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding: 20px;
-        border-radius: 20px; /* Rounded corners for the form area */
-        z-index: 1; /* Ensure the form is above the background shapes */
-    }
-    
-    .title {
-        color: #264143;
-        font-weight: 900;
-        font-size: 2.5em;
-        margin-top: 20px;
-    }
-    
-    .sub_title {
-        font-weight: 600;
-        font-size: 1.5em;
-        margin: 5px 0;
-    }
-    
-    .form_group {
-        display: flex;
-        flex-direction: column;
-        align-items: baseline;
-        margin: 10px;
-    }
-    
-    .form_style {
-        outline: none;
-        border: 2px solid #264143;
-        box-shadow: 3px 4px 0px 1px #E99F4C;
-        width: 100%;
-        padding: 12px 10px;
-        border-radius: 4px;
-        font-size: 15px;
-    }
-    
-    .form_style:focus, .btn:focus {
-        transform: translateY(4px);
-        box-shadow: 1px 2px 0px 0px #E99F4C;
-    }
-    
-    .btn {
-        padding: 15px;
-        margin: 25px 0px;
-        width: 100%;
-        font-size: 15px;
-        background: #DE5499;
-        border-radius: 10px;
-        font-weight: 800;
-        box-shadow: 3px 3px 0px 0px #E99F4C;
-        letter-spacing: 0.1em; /* Adds a small amount of space between letters */
-    }
-    
-    .btn:hover {
-        opacity: .9;
-    }
-    
-    .link {
-        font-weight: 800;
-        color: #264143;
-        padding: 5px;
-    }
-    
-    /* Media Queries for responsiveness */
-    @media only screen and (max-width: 768px) {
-        .container {
-            width: 90%; /* Adjust width for mobile view */
-            height: auto; /* Allow height to adjust based on content */
-        }
-        .form_area {
-            width: 100%; /* Full width for the form area */
-            height: auto; /* Allow height to adjust based on content */
-            padding: 20px; /* Add padding for better spacing */
-        }
-    }
-    
-
-    
- 
-    </style>
+    <canvas id="confettiCanvas"></canvas>
+    <div id="mdContainer"></div>
+    <div class="container">
+        <div class="form_area">
+            <p class="title">SIGN IN</p><br>
+            <form id="loginForm">
+                <div class="form_group">
+                    <label class="sub_title" for="email">Name</label>
+                    <input placeholder="Enter your name" id="email" class="form_style" type="email" required>
+                </div>
+                <div class="form_group">
+                    <label class="sub_title" for="password">Password</label>
+                    <input placeholder="Enter your password" id="password" class="form_style" type="password" required>
+                </div>
+                <div>
+                    <button type="submit" class="btn">SIGN IN</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <script>
-      document.getElementById('loginForm').addEventListener('submit', function(event) {
-          event.preventDefault();
-          
-          const email = document.getElementById('email').value;
-          const password = document.getElementById('password').value;
-          
-          if (
-              (email === '218x1a1227@khitguntur.ac.in' && password === '218x1a1227') ||
-              (email === 'Sahithya' && password === '218x1a1244') ||
-              (email === '218x1a1236@khitguntur.ac.in' && password === '218x1a1236') ||
-              (email === '218x1a1207@khitguntur.ac.in' && password === '218x1a1207') ||
-              (email === '218x1a1210@khitguntur.ac.in' && password === '218x1a1210')
-          ) {
-              // Redirect to another HTML page
-              window.location.href = 'video.html'; // Replace with your page URL
-          } else {
-              Swal.fire({
-                  title: 'Invalid',
-                  text: 'User\'s Email or Password is Invalid',
-                  icon: 'error',
-                  confirmButtonText: 'OK',
-                  background: 'transparent !important',
-                  width: 300
-              });
-              document.querySelector('.swal2-container').classList.add('swal2-blur');
-              setTimeout(function() {
-                  document.querySelector('.swal2-container').classList.remove('swal2-blur');
-              }, 2000);
-          }
-      });
-  </script>
-    
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            if (
+                (email === '218x1a1227@khitguntur.ac.in' && password === '218x1a1227') ||
+                (email === 'Sahithya' && password === '218x1a1244') ||
+                (email === '218x1a1236@khitguntur.ac.in' && password === '218x1a1236') ||
+                (email === '218x1a1207@khitguntur.ac.in' && password === '218x1a1207') ||
+                (email === '218x1a1210@khitguntur.ac.in' && password === '218x1a1210')
+            ) {
+                // Redirect to another HTML page
+                window.location.href = 'video.html'; // Replace with your page URL
+            } else {
+                Swal.fire({
+                    title: 'Invalid',
+                    text: 'User\'s Email or Password is Invalid',
+                    icon: 'error',
+                    confirmButtonText: 'OK',
+                    background: 'transparent !important',
+                    width: 300
+                });
+                document.querySelector('.swal2-container').classList.add('swal2-blur');
+                setTimeout(function() {
+                    document.querySelector('.swal2-container').classList.remove('swal2-blur');
+                }, 2000);
+            }
+        });
+
+        // Script for falling hearts
+        (function() {
+            const canvas = document.getElementById('confettiCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Set canvas dimensions to match window size
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const emoji = '💖'; // Emoji to use
+            const emojis = [];
+            const speedRange = { min: 1, max: 5 }; // Range of falling speeds
+            const sizeRange = { min: 20, max: 40 }; // Range of emoji sizes
+            const emojiCount = 50; // Number of emojis to display
+
+            // Function to generate random number in a range
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            // Emoji class
+            class Emoji {
+                constructor(x, y, size, speed) {
+                    this.x = x;
+                    this.y = y;
+                    this.size = size;
+                    this.speed = speed;
+                }
+
+                update() {
+                    this.y += this.speed;
+                    if (this.y > canvas.height) {
+                        this.y = -this.size;
+                        this.x = randomInRange(0, canvas.width);
+                        this.speed = randomInRange(speedRange.min, speedRange.max);
+                        this.size = randomInRange(sizeRange.min, sizeRange.max);
+                    }
+                }
+
+                draw() {
+                    ctx.font = `${this.size}px serif`;
+                    ctx.fillText(emoji, this.x, this.y);
+                }
+            }
+
+            // Create emojis
+            function createEmojis() {
+                for (let i = 0; i < emojiCount; i++) {
+                    const x = randomInRange(0, canvas.width);
+                    const y = randomInRange(-canvas.height, 0);
+                    const size = randomInRange(sizeRange.min, sizeRange.max);
+                    const speed = randomInRange(speedRange.min, speedRange.max);
+                    emojis.push(new Emoji(x, y, size, speed));
+                }
+            }
+
+            // Draw emojis
+            function drawEmojis() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                emojis.forEach(emoji => {
+                    emoji.update();
+                    emoji.draw();
+                });
+                requestAnimationFrame(drawEmojis);
+            }
+
+            // Initialize
+            function init() {
+                createEmojis();
+                drawEmojis();
+            }
+
+            // Resize canvas on window resize
+            window.addEventListener('resize', function() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                emojis.length = 0; // Clear existing emojis
+                createEmojis(); // Recreate emojis for new canvas size
+            });
+
+            // Start animation
+            init();
+        })();
+    </script>
 </body>
 </html>
