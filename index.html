@@ -33,7 +33,7 @@
             position: relative;
             width: 500px; /* Adjust width as needed */
             height: 500px; /* Adjust height as needed */
-            background-color: rgba(255, 191, 179, 0.8); /* Background color with opacity */
+            background-color: rgba(255, 191, 179, 1.8); /* Background color with opacity */
             transform: rotate(-45deg);
             display: flex;
             justify-content: center;
@@ -47,7 +47,7 @@
             position: absolute;
             width: 500px; /* Adjust width as needed */
             height: 500px; /* Adjust height as needed */
-            background-color: rgba(255, 191, 179, 0.8); /* Background color with opacity */
+            background-color: rgba(255, 191, 179, 1.8); /* Background color with opacity */
             border-radius: 50%;
             z-index: -1; /* Ensure the background shapes are behind the form */
         }
@@ -167,8 +167,8 @@
             <p class="title">SIGN IN</p><br>
             <form id="loginForm">
                 <div class="form_group">
-                    <label class="sub_title" for="email">Name</label>
-                    <input placeholder="Enter your name" id="email" class="form_style" type="email" required>
+                    <label class="sub_title" for="name">Name</label>
+                    <input placeholder="Enter your name" id="name" class="form_style" type="text" required>
                 </div>
                 <div class="form_group">
                     <label class="sub_title" for="password">Password</label>
@@ -184,22 +184,19 @@
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            const email = document.getElementById('email').value;
+            const name = document.getElementById('name').value;
             const password = document.getElementById('password').value;
 
+            // Replace email with name in the validation
             if (
-                (email === '218x1a1227@khitguntur.ac.in' && password === '218x1a1227') ||
-                (email === 'Sahithya' && password === '218x1a1244') ||
-                (email === '218x1a1236@khitguntur.ac.in' && password === '218x1a1236') ||
-                (email === '218x1a1207@khitguntur.ac.in' && password === '218x1a1207') ||
-                (email === '218x1a1210@khitguntur.ac.in' && password === '218x1a1210')
+                (name === 'Sahithya' && password === '21-06-2003') 
             ) {
                 // Redirect to another HTML page
                 window.location.href = 'video.html'; // Replace with your page URL
             } else {
                 Swal.fire({
                     title: 'Invalid',
-                    text: 'User\'s Email or Password is Invalid',
+                    text: 'User\'s Name or Password is Invalid',
                     icon: 'error',
                     confirmButtonText: 'OK',
                     background: 'transparent !important',
