@@ -126,11 +126,11 @@
             }
             .celebration-icon.left {
                 left: 20px;
-                top: 60px;
+                top: 70px;
             }
             .celebration-icon.right {
                 right: 20px;
-                top: 60px;
+                top: 70px;
 
             }
             @keyframes bounce {
@@ -219,6 +219,27 @@
             background-color: #1e90ff;
             animation-delay: 8s;
         }
+
+
+        footer {
+            padding: 20px;
+            margin-top: auto; /* Pushes footer to bottom */
+            width: 100%;
+            text-align: center; /* Center aligns contents within the footer */
+            z-index: 1000; /* Ensure footer is on top of other content */
+            bottom: 0; /* Stick the footer to the bottom of the viewport */
+
+        }
+        footer hr {
+            width: 50%; /* Adjust the width of the horizontal rule as needed */
+            margin: 10px auto; /* Centers the hr and adds margin top and bottom */
+            border: none;
+            border-top: 1px solid #a486ff; /* Optional: Styling the hr with a border */
+        }
+        
+        footer p {
+            margin: 0;
+        }
     </style>
 </head>
 <body>
@@ -235,6 +256,16 @@
         <p>Here's a special video surprise just for you:</p>
         <iframe src="https://drive.google.com/file/d/1J0de0T4RzWCJBt6TlXzZhkZbtTxiJ1He/preview" allow="autoplay; encrypted-media" allowfullscreen></iframe>
         <p class="quote">"Count your life by smiles, not tears. Count your age by friends, not years."</p>
+        <blockquote>
+            నా జీవితంలో నువ్వు ఎవరు అనే పరిచయం నుండి నువ్వు లేని నేను ఏంటి అనే మన ప్రయాణం మరవలేనిది<br>
+            నా జీవితం నుండి చెరపలేని బంధం నువ్వు<br>
+            నా లోకం లోకి వచ్చి<br>
+            నా జీవితానికి ఒక వెలుగు ఇచ్చిన నా బంగారు చెల్లికి ఈ అన్నయ్య ఇచ్చే చిన్న బహుమతి
+          </blockquote>
+          <footer>
+            <hr> <!-- Optional: Adding a horizontal line -->
+            <p>Thank you for everything  - Mohith</p>
+        </footer><br><br><br><br><br><br>
         <div class="balloons left">
             <div class="balloon"></div>
             <div class="balloon"></div>
@@ -296,6 +327,8 @@
             createConfetti();
             drawConfetti();
         })();
+
+        
     </script>
 </body>
 </html>
